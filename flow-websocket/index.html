@@ -1,0 +1,52 @@
+<!DOCTYPE HTML><html>
+<head>
+  <title>FlowSensorOutput</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:,">
+
+  <script>
+    var Socket;
+    function init() {
+      // Socket = new WebSocket('ws://' + window.location.hostname + ':81/');
+      Socket = new WebSocket('ws://192.168.4.1:81/');
+      Socket.onopen = function(e) {console.log("[socket] socket.onopen "); };
+      Socket.onerror = function(e) {  console.log("[socket] socket.onerror "); };
+      Socket.onmessage = function(event) {  
+        processCommand(event);
+      };
+    }
+
+    // Function to process commands recieved by the client from the ucontroller
+    function processCommand(event){
+      var obj = JSON.parse(event.data);
+      document.getElementById('deltaX').innerHTML = obj.deltaX;
+      document.getElementById('deltaY').innerHTML = obj.deltaY;
+      document.getElementById('sumX').innerHTML = obj.sumX;
+      document.getElementById('sumY').innerHTML = obj.sumY;
+      console.log(obj);
+      console.log("[socket] " + event.data);
+      //document.getElementById("my_value").innerHTML = obj.value;
+    }
+
+    window.onload = function(event){
+      init();
+    }
+
+//    function sendText(){
+//      Socket.send(document.getElementById("txBar").value);
+//      document.getElementById("txBar").value = "";
+//    }
+//    function sendBrightness(){
+//      Socket.send("#"+document.getElementById("brightness").value);
+//    } 
+   
+  </script>
+</head>
+<body style="max-width:400px;margin: auto;font-family:Arial, Helvetica, sans-serif;text-align:center; padding-top:50px">
+  <h2>Stupid Flow Sensor</h2>
+  <div> deltaX: <span id='deltaX'>-</span></div>
+  <div> deltaY: <span id='deltaY'>-</span></div>
+  <div> SumX: <span id='sumX'>-</span></div>
+  <div> SumY: <span id='sumY'>-</span></div>
+</body>
+</html>

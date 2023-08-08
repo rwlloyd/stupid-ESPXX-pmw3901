@@ -50,7 +50,7 @@ void loop() {
   sumX += deltaX;
   sumY += deltaY;
 
-  if (!digitalRead(COUNT_RESET_PIN){
+  if (!digitalRead(COUNT_RESET_PIN)){
     sumX = 0;
     sumY = 0;
   }

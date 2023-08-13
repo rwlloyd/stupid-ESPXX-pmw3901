@@ -4,7 +4,7 @@
 #include <WebSocketsServer.h>
 #include <FS.h>
 #include <ArduinoJson.h>
-#include <arduino.h>
+//#include <arduino.h>
 #include "variables.h"
 
 // Replace with your network credentials
